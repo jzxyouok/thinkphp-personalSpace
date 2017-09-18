@@ -1,0 +1,27 @@
+        //循环输出模版//
+        $html='';
+        $html.="
+        <div class='notify-arrow notify-arrow-red'></div>
+          <li>
+            <p class='red'>你有条".$datacount."留言信息
+            </p>
+          </li>";
+        foreach ($data as $mb => $vo) {
+          $html.="<li>";
+          $html.="<a href='#'>";
+          $html.="<span class='photo'>
+          <img alt='' src='public/img/uploads/userimg/".$vo['img']."' style='width:40px;height:40px;'></span>";   
+          $html.="<span class='subject'>";
+          $html.="<span class='from'>".$vo['username']."</span>";
+          $html.="<span class='time'></span>";
+          $html.="</span>";
+          $html.="<span class='message'>".$vo['content']."</span>";                          
+          $html.="</a>";
+          $html.="</li>";           
+          $html.="<li>";
+        }	
+        $data['state'] = 'ok';
+        $data['count'] =$datacount;
+        $data['msg'] = $html;
+        $this->ajaxReturn($data);
+        //循环输出模版//

@@ -1,0 +1,141 @@
+ <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center bottom-separator">
+                    <img src="__PUBLIC__/home/images/home/under.png" class="img-responsive inline" alt="">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="testimonial bottom">
+                        <h2>视频</h2>
+                        <div class="media">
+                <volist name="newvideo" id="vo">
+                      <div class="media-body">
+                           <!-- 存放视频 -->
+            <div class="img-thumbnail" style="width: 300px;height:160px;">
+                <link href="__PUBLIC__/video/css/video-js.css" rel="stylesheet">
+                <!-- If you'd like to support IE8 -->
+                <script src="__PUBLIC__/video/js/videojs-ie8.min.js"></script>
+                <div style="width: 300px;height: 160px;">
+                  <video id="my-videos" class="video-js" controls preload="auto" width="290" height="150"
+                      poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+                    <source src="__PUBLIC__/img/uploads/lastvideo/{$vo.video}" type="video/mp4">
+                    <source src="__PUBLIC__/img/uploads/lastvideo/{$vo.video}" type="video/webm">
+                    <source src="__PUBLIC__/img/uploads/lastvideo/{$vo.video}" type="video/ogg">
+                  </video>
+                 <script src="http://vjs.zencdn.net/5.18.4/video.min.js"></script> 
+                 <script type="text/javascript">
+                   var myPlayer = videojs('my-video');
+                   videojs("my-video").ready(function(){
+                      var myPlayer = this;
+                      myPlayer.play();
+                   });
+                  </script>
+                </div>
+            </div>           
+                                <!-- 存放视频 -->       
+                      </div>
+                </volist>
+                         </div>  
+                    </div> 
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="contact-info bottom">
+                        <h2>说明</h2>
+                        <address>
+                        本网站只属于个人, <br> 
+                        用于记录我们的日常, <br> 
+                        不涉及商业运营 <br> 
+                        不喜勿喷 <br> 
+                        </address>
+
+                        <h2>警告</h2>
+                        <address>
+                        <a href="{:U('Admin/Index/index')}">
+                          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </a>
+                        如若发现账号违规将被禁言 <br> 
+                        请遵守规则 <br> 
+                        </address>
+ 
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="contact-form bottom">
+                        <h2>你想对博主说的</h2>
+                        <form id="main-contact-form" name="contact-form" method="post">
+                            <div class="form-group">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="留言内容"></textarea>
+                            </div>                        
+                            <div class="form-group">
+                               <if condition="$_SESSION['username']!=''">
+                                 <input type="type"  class="btn btn-submit" value="留言" onclick="pomessage()">
+                               <else/>
+                                 <input type="type"  class="btn btn-submit" value="留言" onClick="window.location.href='{:U('Home/Login/login')}'">
+                               </if>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+                <volist name="webfooter" id="vo">
+                        <p>{$vo.titlefrist}</p>
+                        <p>{$vo.titletwo}</p>
+                </volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
+
+    
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/home/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/home/js/wow.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/home/js/main.js"></script>   
+</body>
+</html>
+<!--弹框样式-->
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/skin/layer.css">
+  <script src="__PUBLIC__/layer/layer.js"></script>
+<!--弹框样式-->
+	<script type="text/javascript">
+	function pomessage(){
+		var content=$('#message').val();
+		var ajaxMessageUrl='{:U("Home/Message/domessage")}'; 
+		if(content==''){
+			layer.msg('亲，请输入点内容吧！');
+			return false;
+		}
+		///
+		 $.ajax({
+      //提交数据的类型 POST GET
+        type: "POST",
+      //提交的网址
+        url: ajaxMessageUrl,
+      //提交的数据
+        data: {content:content},
+      //返回数据的格式
+        datatype: "json",
+      //成功返回之后调用的函数
+        success: function (data) {
+      ////根据ajax返回参数判断验证码发送情况
+        if(data['status']=="1"){
+            layer.msg('留言成功!'); 
+			window.location.reload(); 
+        }else if(data['status']=="-2"){
+        	layer.msg('您已被禁言！');  
+        }else{
+            layer.msg('留言成功失败！');   
+        }
+      ////根据ajax返回参数判断验证码发送情况
+        }
+     });
+		///
+	}
+</script>
+	</script>
+	<!-- Footer -->
+

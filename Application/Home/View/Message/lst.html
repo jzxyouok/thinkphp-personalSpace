@@ -1,0 +1,97 @@
+<include file='Public/header'/>
+    <!--/#header-->
+    
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                        <volist name="webinformation"  id="vo">
+                          <if condition="$vo.type eq messagetype">
+                            <h1 class="title">{$vo.title}</h1>
+                            <p>{$vo.caption}</p>
+                          </if>
+                        </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#page-breadcrumb-->
+    
+    <section id="blog" class="padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="timeline-blog overflow padding-top">
+                    <div class="timeline-date text-center">
+                        <a href="#" class="btn btn-common uppercase">聊天详情</a>
+                    </div>
+
+                    <div class="timeline-divider overflow padding-bottom">
+              <volist name="data" id="vo" key="key">  
+                    <!-- 用户-->
+                    <if condition="$key eq 1">
+                        <div class="col-sm-6 padding-right arrow-right wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.userimg}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">{$vo.day}  <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="{:U('Message/messagelist','','')}/mid/{$vo.id}" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                        <span class="comments-number pull-right"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">{$vo.comment} comments</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <elseif condition='$key eq 2'/>
+                     <!--管理员-->
+                        <div class="col-sm-6 padding-left padding-top arrow-left wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.userimg}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">{$vo.day} <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="{:U('Message/messagelist','','')}/mid/{$vo.id}" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                        <span class="comments-number pull-right"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">{$vo.comment} comments</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </if>
+            </volist>     
+                    </div>
+                    <div class="text-center">
+                        {$page}
+                    </div>
+           
+      
+                </div>
+            </div>
+        
+        </div>
+    </section>
+    <!--/#blog-->
+    <!--/#clients-->
+   <include file='Public/footer'/>

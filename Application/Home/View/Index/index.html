@@ -1,0 +1,202 @@
+<include file='Public/header'/>
+    <!--/#header-->
+
+    <section id="home-slider">
+        <div class="container">
+            <div class="row">
+                <div class="main-slider">
+                    <div class="slide-text">
+                    <volist name="webinformation"  id="vo">
+                        <if condition="$vo.type eq indextop">
+                        <h1>{$vo.title}</h1>
+                        <p>{$vo.caption}</p>
+                        </if>
+                    </volist>
+                    </div>
+                 <if condition="$status eq 0">
+                    <img src="__PUBLIC__/home/images/home/slider/hill.png" class="slider-hill" alt="slider image">
+                    <img src="__PUBLIC__/home/images/home/slider/house.png" class="slider-house" alt="slider image">
+                    <img src="__PUBLIC__/home/images/home/slider/sun.png" class="slider-sun" alt="slider image">
+                 <else/>
+                    <img src="__PUBLIC__/home/images/home/slider/hill2.png" class="slider-hill" alt="slider image">
+                    <img src="__PUBLIC__/home/images/home/slider/house2.png" class="slider-house" alt="slider image">
+                    <img src="__PUBLIC__/home/images/home/slider/month.png" class="slider-sun" alt="slider image">
+                 </if>
+                    
+                    <img src="__PUBLIC__/home/images/home/slider/birds1.png" class="slider-birds1" alt="slider image">
+                    <img src="__PUBLIC__/home/images/home/slider/birds2.png" class="slider-birds2" alt="slider image">
+                </div>
+            </div>
+        </div>
+        <div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>
+    </section>
+    <!--/#home-slider-->
+                                <!-- 轮播图 -->
+    <section id="team">
+        <div class="container">
+            <div class="row">
+                <div id="team-carousel" class="carousel slide wow fadeIn" data-ride="carousel" data-wow-duration="400ms" data-wow-delay="400ms">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators visible-xs">
+                        <li data-target="#team-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#team-carousel" data-slide-to="1"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                    <foreach name="lunbo" item="vo" key="key">
+                        <if condition="$key lt 4">
+                          <div class="col-sm-3 col-xs-6">
+                             <div class="team-single-wrapper">
+                               <div class="team-single">
+                                 <div class="person-thumb">
+                                   <img src="__PUBLIC__/img/uploads/lunbo/{$vo.img}" class="img-responsive" alt="" style="width: 262px;height: 270px;">
+                                 </div>
+                                <div class="social-profile">
+                                  <ul class="nav nav-pills">
+                                    <li><a href="#">I</a></li>
+                                    <li><a href="#">LOVE</a></li>
+                                    <li><a href="#">YOU</a></li>
+                                  </ul>
+                                </div>
+                               </div>
+                               <div class="person-info">
+                                 <h2 style="text-align: center;">{$vo.content}.</h2>
+                                 <!-- <p>{$vo.content}.</p> -->
+                               </div>
+                             </div>
+                          </div>
+                    </if>
+                </foreach>
+                        </div>
+                        <div class="item">
+                         <foreach  name="lunbo" item="vo" key="key">
+                           <if condition="($key gt 3) AND ($key lt 9)">
+                             <div class="col-sm-3 col-xs-6">
+                               <div class="team-single-wrapper">
+                                <div class="team-single">
+                                   <div class="person-thumb">
+                                      <img src="__PUBLIC__/img/uploads/lunbo/{$vo.img}" class="img-responsive" alt="" style="width: 262px;height: 270px;">
+                                   </div>
+                                   <div class="social-profile">
+                                     <ul class="nav nav-pills">
+                                        <li><a href="#">I</a></li>
+                                        <li><a href="#">LOVE</a></li>
+                                        <li><a href="#">YOU</a></li>
+                                     </ul>
+                                   </div>
+                                </div>
+                                <div class="person-info">
+                                   <h2 style="text-align: center;">{$vo.content}.</h2>
+                                   <!-- <p>{$vo.content}.</p> -->
+                                </div>
+                               </div>
+                             </div>
+                           </if>
+                      </foreach>
+                    </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left team-carousel-control hidden-xs" href="#team-carousel" data-slide="prev">left</a>
+                    <a class="right team-carousel-control hidden-xs" href="#team-carousel" data-slide="next">right</a>
+                </div>
+            </div>
+        </div>
+    </section>
+                            <!-- 轮播图 -->
+    <!--/#services-->
+
+    <section id="action" class="responsive">
+        <div class="vertical-center">
+             <div class="container">
+                <div class="row">
+                    <div class="action take-tour">
+                        <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <volist name="webinformation"  id="vo">
+                          <if condition="$vo.type eq indexbanner">
+                            <h1 class="title">{$vo.title}</h1>
+                            <p>{$vo.caption}</p>
+                          </if>
+                        </volist>
+                        </div>
+                        <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <div class="tour-button">
+                                <a href="{:U('Article/lst','','')}/type/1" class="btn btn-common">查看更多</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+    <!--/#action-->
+
+    <section id="features">
+        <div class="container">
+            <div class="row">
+            <volist name="article" id="vo" key="key">
+              <if condition='$key eq 1'>
+                <div class="single-features">
+                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="__PUBLIC__/img/uploads/fileimg/{$vo.img}" class="img-responsive" alt="" style="width: 400px;height: 184px;">
+                    </div>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>{$vo.filename}</h2>
+                        <P>{$vo.describe}.</P>
+                    </div>
+                </div>
+              <elseif condition='$key eq 2'/>
+                <div class="single-features">
+                    <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>{$vo.filename}</h2>
+                        <P>{$vo.describe}.</P>
+                    </div>
+                    <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="__PUBLIC__/img/uploads/fileimg/{$vo.img}" class="img-responsive" alt="" style="width: 427px;height: 140px;">
+                    </div>
+                </div>
+              <elseif condition='$key eq 3'/>
+                <div class="single-features">
+                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="__PUBLIC__/img/uploads/fileimg/{$vo.img}" class="img-responsive" alt="" style="width: 385x;height: 130px;">
+                    </div>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>{$vo.filename}</h2>
+                        <P>{$vo.describe}.</P>
+                    </div>
+                </div>
+              </if>
+            </volist>
+            </div>
+        </div>
+    </section>
+     <!--/#features-->
+
+    <section id="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <p><img src="__PUBLIC__/home/images/home/clients.png" class="img-responsive" alt=""></p>
+                    <volist name="webinformation"  id="vo">
+                      <if condition="$vo.type eq indexfooter">
+                        <h1 class="title">{$vo.title}</h1>
+                        <p>{$vo.caption}</p>
+                      </if>
+                    </volist>
+                    </div>
+                    <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <volist name="imgdata" id="vo" key="key">
+                      <if condition='$key lt 7'>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="{:U('Image/lst','','')}/id/{$vo.tid}"><img src="__PUBLIC__/img/uploads/imgs/{$vo.img}" class="img-responsive" alt="" style="width: 130px;height: 130px;"></a>
+                        </div>
+                      </if>
+                    </volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+    <!--/#clients-->
+   <include file='Public/footer'/>

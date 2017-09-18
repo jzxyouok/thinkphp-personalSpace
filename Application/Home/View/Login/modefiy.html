@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+	<title>{$loginTitle}</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="__PUBLIC__/login/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/login/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/login/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/login/css/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<script src="__PUBLIC__/home/loginjs/jquery-2.1.1.js"></script>
+    <script src="__PUBLIC__/home/loginjs/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/skin/layer.css">
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body class="templatemo-bg-gray">
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="margin-bottom-15">{$loginTitle}</h1>
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form"  method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+		            <div class="control-wrapper">
+		            	<label for="username" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+		            	<input type="text" class="form-control" id="username" name="username" placeholder="用户名" value="{$username}" readonly="true">
+                  <input type="hidden" class="text" value="{$userid}" onblur="" id="userid" name="userid" placeholder="">
+		            </div>		            	            
+		          </div>              
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+		            	<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+		            </div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+	             	<div class="control-wrapper">
+		            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+                  <input type="password" class="form-control" id="passwords" name="passwords" placeholder="重复密码">
+	              	</div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          		<input type="button" onclick="dologin()" value="修改" class="btn btn-info">
+		          	</div>
+		          </div>
+		        </div>
+		        <hr>
+		      </form>
+		      <div class="text-center">
+            <volist name="loginfooter" id="vo">
+		      	   <a href="{:U('Index/index')}" class="templatemo-create-new">{$vo.title}<i class="fa fa-arrow-circle-o-right"></i></a>	
+            </volist>
+		      </div>
+		</div>
+	</div>
+</body>
+<!---//end-copyright-->
+<script type="text/javascript">
+  function dologin(){
+    var password=$('#password').val();
+    var passwords=$('#passwords').val();
+    var username=$('#username').val();
+    var userid=$('#userid').val();
+    var ajaxSidUrl='{:U("Login/dopassword")}'; 
+   if((password=='')||(passwords=='')){
+     layer.msg('密码不允许为空！');
+     return false;
+   }
+   if((password!='')&&(passwords!='')){
+         if(password!=passwords){
+           layer.msg('两次密码不一致！');
+       return false;
+         }
+   }
+   //ajax请求//
+   $.ajax({
+      //提交数据的类型 POST GET
+        type: "POST",
+      //提交的网址
+        url: ajaxSidUrl,
+      //提交的数据
+        data: {username: username,password:password,userid:userid},
+      //返回数据的格式
+        datatype: "json",
+      //成功返回之后调用的函数
+        success: function (data) {
+      ////根据ajax返回参数判断验证码发送情况
+        if(data['status']=="1"){
+          layer.msg('修改成功!');     
+            window.location.href="{:U('Home/Login/login')}";
+        }else{
+            layer.msg('未知错误!');   
+        }
+      ////根据ajax返回参数判断验证码发送情况
+        }
+     });
+   //ajax请求//
+  }
+</script>
+</html>

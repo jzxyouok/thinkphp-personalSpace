@@ -1,0 +1,294 @@
+<include file='Public/header'/>
+    <!--/#header-->
+    
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                        <volist name="webinformation"  id="vo">
+                          <if condition="$vo.type eq messagetype">
+                            <h1 class="title">{$vo.title}</h1>
+                            <p>{$vo.caption}</p>
+                          </if>
+                        </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#page-breadcrumb-->
+    
+    <section id="blog" class="padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="timeline-blog overflow padding-top">
+                    <div class="timeline-date text-center">
+                        <a href="#" class="btn btn-common uppercase">聊天详情</a>
+                    </div>
+
+                    <div class="timeline-divider overflow padding-bottom">
+                    <!--
+                    <volist name="message" id="vo"> 
+                        <div class="col-sm-6 padding-right arrow-right wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms>
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.userimg}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">{$vo.day}  <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="{:U('Message/messagelist','','')}/mid/{$vo.id}" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                        <span class="comments-number pull-right"><a href="{:U('Message/messagelist','','')}/mid/{$vo.id}">用户</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </volist>
+                    -->
+              <volist name="data" id="vo" key="key">  
+                  <!-- 1-->
+                  <if condition="$key eq 1">
+                      <div class="col-sm-6 padding-right arrow-right wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                      <if condition="$vo.meth eq 0">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <img src="__PUBLIC__/img/uploads/admin/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                      </if>
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="">{$vo.day}  <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                      <if condition="$vo.meth eq 0">
+                                        <span class="comments-number pull-right"><a href="">用户:{$vo.name}</a></span>   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <span class="comments-number pull-right"><a href="">管理员:{$vo.name}</a></span>
+                                      </if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    <elseif condition='$key eq 2'/>
+                     <!--2-->
+                        <div class="col-sm-6 padding-left padding-top arrow-left wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                      <if condition="$vo.meth eq 0">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <img src="__PUBLIC__/img/uploads/admin/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                      </if>
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="">{$vo.day} <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                      <if condition="$vo.meth eq 0">
+                                        <span class="comments-number pull-right"><a href="">用户:{$vo.name}</a></span>   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <span class="comments-number pull-right"><a href="">管理员:{$vo.name}</a></span>
+                                      </if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 1-->
+                  <elseif condition="$key eq 3">
+                      <div class="col-sm-6 padding-right arrow-right wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                      <if condition="$vo.meth eq 0">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <img src="__PUBLIC__/img/uploads/admin/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                      </if>
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="">{$vo.day}  <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                      <if condition="$vo.meth eq 0">
+                                        <span class="comments-number pull-right"><a href="">用户:{$vo.name}</a></span>   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <span class="comments-number pull-right"><a href="">管理员:{$vo.name}</a></span>
+                                      </if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    <elseif condition='$key eq 4'/>
+                     <!--2-->
+                        <div class="col-sm-6 padding-left padding-top arrow-left wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="single-blog timeline">
+                                <div class="single-blog-wrapper">
+                                    <div class="post-thumb">
+                                      <if condition="$vo.meth eq 0">
+                                        <img src="__PUBLIC__/img/uploads/userimg/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <img src="__PUBLIC__/img/uploads/admin/{$vo.img}" class="img-responsive" alt="" style="width: 60px;height: 60px;">
+                                      </if>
+                                        <div class="post-overlay">
+                                           <span class="uppercase"><a href="">{$vo.day} <br><small>{$vo.month}</small></a></span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="">发表留言内容：</a></h2>
+                                    <h3 class="post-author"></h3>
+                                    <p>{$vo.content}</p>
+                                    <a href="" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <span class="post-date pull-left">{$vo.creattime|date='Y-m-d H:i:s',###}</span>
+                                      <if condition="$vo.meth eq 0">
+                                        <span class="comments-number pull-right"><a href="">用户:{$vo.name}</a></span>   
+                                      <elseif condition="$vo.meth eq 1"/>
+                                        <span class="comments-number pull-right"><a href="">管理员:{$vo.name}</a></span>
+                                      </if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </if>
+                  <!-- -->
+              </volist>     
+                    </div>
+                    <div class="text-center">
+                        {$page}
+                    </div>
+            <!--   -->
+                <div style="text-align: center;">
+                  <form method="post">
+                     <input type="hidden" class="form-control" id="mid" name="mid" value="{$mid}">
+                     <textarea name="recontent" id="recontent">
+                     </textarea><br/>
+                     <center><input class="btn btn-success" type="button"  value="提交" onClick="remessage()"></center>
+                  </form>
+                </div>
+            <!--  -->
+
+
+                </div>
+            </div>
+        
+        </div>
+    </section>
+    <!--/#blog-->
+    <!--/#clients-->
+   <include file='Public/footer'/>
+   <!--文本编辑器-->
+<!--弹框样式-->
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/skin/layer.css">
+  <script src="__PUBLIC__/layer/layer.js"></script>
+<!--弹框样式-->
+<!-- 配置文件 -->
+  <script type="text/javascript" src="__PUBLIC__/admin/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+  <script type="text/javascript" src="__PUBLIC__/admin/ueditor/ueditor.all.js"></script>
+  <script type="text/javascript">
+      $(function(){
+        var ue = UE.getEditor('content',{
+            elementPathEnabled :false,
+            autoHeightEnabled: false,
+            "initialFrameHeight" : 250,
+            toolbars: [
+            ['fullscreen','undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough','emotion']]
+            });
+            var reue = UE.getEditor('recontent',{
+               elementPathEnabled :false,
+               autoHeightEnabled: false,
+               "initialFrameHeight" : 100,
+               toolbars: [['fullscreen','undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough','emotion']]
+            });
+      });
+   </script>
+   <!-- 回复留言 -->
+   <script type="text/javascript">
+    function remessage(){
+      var mid=$('#mid').val();
+      var recontent=UE.getEditor('recontent').getContent();
+      var ajaxMessageUrl='{:U("Home/Message/doremessage")}';
+      if(recontent==''){
+         layer.msg('亲，请说点什么吧！');
+         return false;
+      }
+///
+        $.ajax({
+      //提交数据的类型 POST GET
+        type: "POST",
+      //提交的网址
+        url: ajaxMessageUrl,
+      //提交的数据
+        data: {mid:mid,recontent:recontent},
+      //返回数据的格式
+        datatype: "json",
+      //成功返回之后调用的函数
+        success: function (data) {
+      ////根据ajax返回参数判断验证码发送情况
+        if(data['status']=="1"){
+            layer.msg('回复成功!'); 
+            window.location.href="{:U('/Home/Message/lst')}";
+        }else if(data['status']=="-2"){
+            layer.msg('您已被禁言！');  
+        }else{
+            layer.msg('回复失败！');   
+        }
+      ////根据ajax返回参数判断验证码发送情况
+        }
+     });
+        ///
+    }
+   </script>
+  <!-- 回复留言 -->
+  <!--文本编辑器-->    
+    <!-- JS -->
+    <script src="owl-carousel/owl.carousel.js"></script>
+    <script>
+    $(document).ready(function() {
+      $("#owl-demo").owlCarousel({
+        autoPlay: 3000,
+        items : 5,
+        itemsDesktop : [1199,4],
+        itemsDesktopSmall : [979,4]
+      });
+
+    });
+    </script>

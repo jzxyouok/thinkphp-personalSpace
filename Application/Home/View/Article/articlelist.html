@@ -1,0 +1,224 @@
+<include file='Public/header'/>
+    <!--/#header-->
+
+ <volist name="date" id="vo">
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">{$vo.filename}</h1>
+                        </div>                                                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#page-breadcrumb-->
+
+    <section id="blog-details" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-7">
+                    <div class="row">
+                         <div class="col-md-12 col-sm-12">
+                            <div class="single-blog blog-details two-column">
+                                <div class="post-thumb">
+                                    <img class="img-thumbnail" src="__PUBLIC__/img/uploads/fileimg/{$vo.img}" style="width: 850px;height: 400px;">
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="">{$vo.day}<br><small>{$vo.month}</small></a></span>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold">{$vo.describe}</h2>
+                                    <h3 class="post-author"><a href="#">{$vo.publishtime|date='Y-m-d H:i:s',###}</a></h3>
+                                    <p>{$vo.content}</p>
+                                    <div class="post-bottom overflow">
+                                        <ul class="nav navbar-nav post-nav">
+                                            <li><a href="#"><i class="fa fa-tag"></i>{$vo.filetype}</a></li>
+                                            <li><a href="#"><i class="fa fa-users"></i>{$vo.reader}</a></li>
+                                            <li><a onClick="sendGo({$vo.id})"><i class="fa fa-thumbs-up"></i>{$vo.thumbs}</a></li>
+                                        </ul>
+                                    </div>
+</volist>
+                                    <div class="blog-share">
+                                        <span class='st_facebook_hcount'></span>
+                                        <span class='st_twitter_hcount'></span>
+                                        <span class='st_linkedin_hcount'></span>
+                                        <span class='st_pinterest_hcount'></span>
+                                        <span class='st_email_hcount'></span>
+                                    </div>                              
+                                    <div class="response-area">
+                                    <h2 class="bold">评论</h2>
+                                    <ul class="media-list">
+                               <volist name="pinglun" id="vo">         
+                                        <li class="media" style="margin-left:-55px;height:130px;">
+                                            <div class="post-comment">
+                                                <a class="pull-left" href="#" style="width:86px;">
+                                                    <img src="__PUBLIC__/img/uploads/userimg/{$vo.userimg}" style="width: 66px;height: 66px;" />
+                                                </a>
+                                                <div class="media-body">
+                                                    <span><i class="fa fa-user"></i>Posted by <a href="#">{$vo.username}</a></span>
+                                                    <p style="font-size:18px;">{$vo.content}</p>
+                                                    <ul class="nav navbar-nav post-nav">
+                                                        <li><a href="#"><i class="fa fa-clock-o"></i><span style="font-size:10px;">{$vo.time|date='Y-m-d H:i:s',###}</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                               </volist>         
+                                    </ul>                   
+                                </div><!--/Response-area-->
+                                <div style="text-align:center;">{$page}</div>
+                                </div>
+                               <!-- -->
+                               <div>
+				   <form method="post">
+				      <input type="hidden" class="form-control" id="rjid" name="rjid" value="{$artcileid}">
+					  <textarea name="content" id="content">
+					  </textarea>
+					  <center>
+                      <if condition="$_SESSION['username'] eq ''">
+                          <input class="btn btn-submit" type="button"  value="提交" onClick="window.location.href='{:U('Home/Login/login')}'" style="float: left;margin-top: 5px;width:150px;">    
+                      <else/>
+                          <input class="btn btn-submit" type="button"  value="提交" onClick="dopinglun()" style="float: left;margin-top: 5px;width:150px;">    
+                      </if>
+                      </center>
+				   </form>
+                   <br/>
+			                   </div>
+                               <!-- -->
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">
+                        <div class="sidebar-item  recent">
+                            <h3>同类日记</h3>
+                  <volist name="filedata" id="vo">     
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="{:U('Article/articlelist','','')}/rid/{$vo.id}"><img src="__PUBLIC__/img/uploads/fileimg/{$vo.img}" style="width: 52px;height: 52px;" /></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="{:U('Article/articlelist','','')}/rid/{$vo.id}">{$vo.describe}</a></h4>
+                                    <p>{$vo.publishtime|date='Y-m-d H:i:s',###}</p>
+                                </div>
+                            </div>
+                  </volist>
+                            
+                        </div>
+                        <div class="sidebar-item categories">
+                            <h3>分类</h3>
+                            <ul class="nav navbar-stacked">
+                     <volist name="articletype" id="vo" key="key">
+                                <li><a href="{:U('Article/lst','','')}/type/{$vo.id}">{$vo.type}</a></li>
+                    </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#blog-->
+    <!-- -->
+    <include file='Public/footer'/>
+    <script src="owl-carousel/owl.carousel.js"></script>
+	<!--  配置文件 -->
+    <script type="text/javascript" src="__PUBLIC__/admin/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/admin/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript">
+       $(function(){
+           var ue = UE.getEditor('content',{
+              elementPathEnabled :false,
+              autoHeightEnabled: false,
+              "initialFrameHeight" : 100,
+			  toolbars: [
+           ['fullscreen','undo', 'redo','bold', 'italic', 'underline', 'fontborder', 'strikethrough','emotion']
+]
+          });
+      });      
+    </script>
+    <!--弹框样式-->
+      <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/skin/layer.css">
+      <script src="__PUBLIC__/layer/layer.js"></script>
+    <!--弹框样式-->
+    <script type="text/javascript">
+	   function dopinglun(){
+         var content=UE.getEditor('content').getContent();
+         var fid=$('#rjid').val();
+	     var ajaxcontentUrl='{:U("Home/Article/dopinglun")}';
+	     // ajax提交
+	     $.ajax({
+         //提交数据的类型 POST GET
+             type: "POST",
+         //提交的网址
+             url: ajaxcontentUrl,
+         //提交的数据
+             data: {fid:fid,content:content},
+         //返回数据的格式
+             datatype: "json",
+         //成功返回之后调用的函数
+             success: function (data) {
+         ////根据ajax返回参数判断验证码发送情况
+               if(data['status']=="1"){
+                 layer.msg('评论成功!'); 
+                 window.location.href="{:U('Home/Article/articlelist','','')}/rid/{$artcileid}";
+               }else if(data['status']=="-2"){
+        	     layer.msg('您已被禁言！');  
+               }else{
+                 layer.msg('评论失败！');   
+               }
+      ////根据ajax返回参数判断验证码发送情况
+             }
+            });
+	  // ajax提交
+	     }
+    </script>
+    <script type="text/javascript">
+        function sendGo($id){
+           var id=$id;
+           var ajaxcontentUrl='{:U("Home/Article/sendGood")}';
+         // ajax提交
+         $.ajax({
+         //提交数据的类型 POST GET
+             type: "POST",
+         //提交的网址
+             url: ajaxcontentUrl,
+         //提交的数据
+             data: {fid:id},
+         //返回数据的格式
+             datatype: "json",
+         //成功返回之后调用的函数
+             success: function (data) {
+         ////根据ajax返回参数判断验证码发送情况
+               if(data['status']=="1"){
+                 layer.msg('点赞成功!'); 
+                 window.location.href="{:U('Home/Article/articlelist','','')}/rid/{$artcileid}";
+               }else{
+                 layer.msg('点赞失败！');   
+               }
+      ////根据ajax返回参数判断验证码发送情况
+             }
+            });
+      // ajax提交
+
+        }
+    </script>
+    <script>
+      $(document).ready(function() {
+        $("#owl-demo").owlCarousel({
+          autoPlay: 3000,
+          items : 5,
+          itemsDesktop : [1199,4],
+          itemsDesktopSmall : [979,4]
+        });
+
+     });
+    </script>
+    <!-- ->
+

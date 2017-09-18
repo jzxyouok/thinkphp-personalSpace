@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{$webTitle}</title>
+    <!--
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    -->
+    <link href="__PUBLIC__/home/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/home/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/home/css/animate.min.css" rel="stylesheet"> 
+    <link href="__PUBLIC__/home/css/lightbox.css" rel="stylesheet"> 
+    <link href="__PUBLIC__/home/css/main.css" rel="stylesheet">
+    <link href="__PUBLIC__/home/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="__PUBLIC__/home/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="__PUBLIC__/home/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="__PUBLIC__/home/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="__PUBLIC__/home/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="__PUBLIC__/home/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body oncontextmenu=self.event.returnValue=false onselectstart="return false">
+    <header id="header">      
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                         <if condition="$_SESSION['username'] neq ''">
+                        <a href="{:U('Home/User/lst')}">
+                            <img src="__PUBLIC__/img/uploads/userimg/{$_SESSION['userimg']}" alt="..." class="img-circle" style="width:30px;height:30px;margin-left:15px;margin-botton:20px;">
+                        </a>
+                            <li><a href="{:U('Login/doout')}" style="font-size:10px;margin-top:5px;">退出</a></li>
+                        <else/>
+                            <li><a href="{:U('Login/login')}" style="font-size:10px;margin-top:5px;">登陆</a></li>
+                            <li><a href="{:U('Login/reg')}" style="font-size:10px;margin-top:5px;">注册</a></li>
+                         </if>
+                        </ul>
+                    </div> 
+                </div>
+             </div>
+        </div>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                        <h1><img src="__PUBLIC__/home/images/logo.png" alt="logo"></h1>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="{$topStatusOne}"><a href="{:U('Index/index')}">首页</a></li>
+                        <li class="dropdown {$topStatustwo}"><a href="">相册 <i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                              <volist name="imgtype" id="vo" key="key">
+                                <li><a href="{:U('Image/lst','','')}/id/{$vo.id}">{$vo.type}</a></li>
+                              </volist>
+                            </ul>
+                        </li>                    
+                        <li class="dropdown {$topStatusthree}"><a href="">日记 <i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                              <volist name="articletype" id="vo" key="key">
+                                <li><a href="{:U('Article/lst','','')}/type/{$vo.id}">{$vo.type}</a></li>
+                              </volist>
+                            </ul>
+                        </li>
+                        <li class="dropdown {$topStatusfour}"><a href="portfolio.html">视频 <i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                              <volist name="viedotype" id="vo" key="key">
+                                <li><a href="{:U('Video/lst','','')}/id/{$vo.id}">{$vo.name}</a></li>
+                              </volist>
+                            </ul>
+                        </li>                         
+                        <li class="{$topStatusfive}"><a href="{:U('Home/Message/lst')}">留言</a></li>                    
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>

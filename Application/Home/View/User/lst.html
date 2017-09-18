@@ -1,0 +1,177 @@
+<include file='Public/header'/>
+
+<body>
+     <section id="coming-soon">        
+         <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">                    
+                    <div class="text-center coming-content">
+                        <h1>个人中心</h1>
+                        <p>你可以在个人中心查看个人账号基本信息<br /> 或者修改个人基本信息.</p>                           
+                        <div class="social-link">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-sm-12">
+                    <div class="time-count">
+                <!--            主体       -->
+                        <div id="countdown">
+                           <volist name="data" id="vo">
+                    <form method="post" class="form-horizontal">
+                       <div class="form-group">
+                          <label for="" class="col-sm-2 control-label">头像</label>
+                          <div class="col-sm-10">
+                                  <!--  头像   -->
+                            <div class="ibox-content">
+                               <div class="row">
+                                  <div id="crop-avatar" class="col-md-6">
+                                    <div class="avatar-view" style="width:100px;height:100px">
+                                      <input  id="img" name="img" type="hidden" value="{$vo.user_img}">
+                                      <input  id="aspectRatio" type="hidden" value="1">
+                                      <input  id="img_root_url" type="hidden" value="__PUBLIC__/img/uploads/userimg">
+                                      <img src="__PUBLIC__/img/uploads/userimg/{$img}" alt="点击修改图片" style="width:100px;height:100px">
+                                     </div>
+                                   </div>
+                                </div>
+                            </div>      
+                                  <!--  头像   -->
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label for="" class="col-sm-2 control-label">用户名</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" placeholder="用户名" name="username" value="{$vo.username}">
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label for="" class="col-sm-2 control-label">密码</label>
+                          <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="加密不可见">
+                          </div>               
+                       </div>
+                       <div class="form-group">
+                          <label for="" class="col-sm-2 control-label">手机号</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="手机号码" value="{$vo.phone}">
+                          </div>
+                       </div>
+                       <button type="button" class="btn btn-default btn-success" onClick="updateuser()">修改</button>
+                       <div class="form-group">
+                       </div>
+                    </form>                                         
+                        </ul> 
+                    </volist>     
+                <!--            主体                          --> 
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </section>
+<!-- footer -->
+    <include file='Public/footer'/>
+      <!---头像模态框  -->
+<link href="__PUBLIC__/img_cut_upload/css/cropper.min.css" rel="stylesheet">
+<link href="__PUBLIC__/img_cut_upload/css/sitelogo.css" rel="stylesheet">
+<script src="__PUBLIC__/img_cut_upload/js/cropper.min.js"></script>
+<script src="__PUBLIC__/img_cut_upload/js/sitelogo.js"></script>
+<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg"  style="width:1000px;">
+    <div class="modal-content">
+      <form class="avatar-form" action="{:U('Admin/User/postimg',array('id'=>$uid))}" enctype="multipart/form-data" method="post">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal" type="button">&times;</button>
+          <h4 class="modal-title" id="avatar-modal-label">用户头像</h4>
+        </div>
+        <div class="modal-body">
+          <div class="avatar-body">
+            <div class="avatar-upload">
+              <input class="avatar-src" name="avatar_src" id="avatar_src" type="hidden">
+              <input class="avatar-data" name="avatar_data" type="hidden">
+              <label for="avatarInput">图片上传</label>
+              <input class="avatar-input" id="avatarInput" name="avatar_file" type="file" style="display:none;"></div>
+              <img src="__PUBLIC__/images/shangchuang.png" onclick="$('#avatarInput').click();">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="avatar-wrapper"></div>
+              </div>
+              <div class="col-md-3">
+                <div class="avatar-preview preview-lg"></div>
+                <div class="avatar-preview preview-md"></div>
+                <div class="avatar-preview preview-sm"></div>
+              </div>
+            </div>
+            <div class="row avatar-btns">
+              <div class="col-md-9">
+                <div class="btn-group">
+                  <button class="btn" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"><i class="fa fa-undo"></i> 向左旋转</button>
+                </div>
+                <div class="btn-group">
+                  <button class="btn" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"><i class="fa fa-repeat"></i> 向右旋转</button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-success btn-block avatar-save" type="submit"><i class="fa fa-save"></i> 保存修改</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+<!---头像模态框-->
+<!--文本编辑器-->
+<!--弹框样式-->
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/skin/layer.css">
+  <script src="__PUBLIC__/layer/layer.js"></script>
+<!--弹框样式-->
+<!-- 配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/admin/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/admin/ueditor/ueditor.all.js"></script>
+
+<script type="text/javascript">
+    function updateuser(){
+        var username=$('#username').val();
+        var userid=$('#userid').val();
+        var password=$('#password').val();
+        var phone=$('#phone').val();
+        var ajaxuserUrl='{:U("Home/User/edituser")}'; 
+        if(username==''){
+            layer.msg('用户名不允许为空！');
+            return false;
+        }
+        if(phone==''){
+            layer.msg('手机号码不允许为空！');
+            return false;
+        }
+        ///
+        $.ajax({
+      //提交数据的类型 POST GET
+        type: "POST",
+      //提交的网址
+        url: ajaxuserUrl,
+      //提交的数据
+        data: {username:username,userid:userid,password:password,phone:phone},
+      //返回数据的格式
+        datatype: "json",
+      //成功返回之后调用的函数
+        success: function (data) {
+      ////根据ajax返回参数判断验证码发送情况
+        if(data['status']=="1"){
+            layer.msg('修改成功!'); 
+            window.location.href="{:U('/Home/User/lst')}";
+        }else if(data['status']=="-1"){
+            layer.msg('存在该用户名！');  
+        }else if(data['status']=="-2"){
+            layer.msg('存在该手机号码！');  
+        }else{
+            layer.msg('修改失败！');   
+        }
+      ////根据ajax返回参数判断验证码发送情况
+        }
+     });
+        ///
+    }
+</script>

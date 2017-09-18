@@ -1,0 +1,106 @@
+<include file='Public/header'/>
+    <!--/#header-->
+
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                        <volist name="webinformation"  id="vo">
+                          <if condition="$vo.type eq videotype">
+                            <h1 class="title">{$vo.title}</h1>
+                            <p>{$vo.caption}</p>
+                          </if>
+                        </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+    <!--/#page-breadcrumb-->
+
+    <section id="projects">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-8">
+                    <div class="row">
+                        <ul class="portfolio-filter text-center">
+                         <li><a class="btn btn-default {$ops}"  onClick="window.location.href='{:U('Video/lst','','')}/id/{$vid}'" data-filter="*">All</a></li>
+                 <volist name="theme" id="vo">
+                         <li><a class="btn btn-default {$vo.op}" href="#" onClick="window.location.href='{:U('Video/lst','','')}/id/{$vid}/tid/{$vo.id}'">{$vo.name}</a></li>
+                 </volist>
+                        </ul><!--/#portfolio-filter-->
+                        
+                        <div class="portfolio-items">
+                 <volist name="videodata" id="vo">  
+                    <if condition="$vo.open eq '1' ">
+                            <div class="col-xs-6 col-sm-6 col-md-4 portfolio-item branded logos">
+                                <div class="portfolio-wrapper">
+                                 <!--*****视频******-->
+              <div class="img-thumbnail" style="width: 261px;height: 269px;margin-left: 10px;">
+                <link href="__PUBLIC__/video/css/video-js.css" rel="stylesheet">
+                <!-- If you'd like to support IE8 -->
+                <script src="__PUBLIC__/video/js/videojs-ie8.min.js"></script>
+                   <div style="width: 261px;height: 269px;">
+                     <video id="my-video" class="video-js" controls preload="auto" width="251" height="259"
+                         poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+                        <source src="__PUBLIC__/img/uploads/video/{$vo.video}" type="video/mp4">
+                        <source src="__PUBLIC__/img/uploads/video/{$vo.video}" type="video/webm">
+                        <source src="__PUBLIC__/img/uploads/video/{$vo.video}" type="video/ogg">
+                     </video>
+                     <script src="http://vjs.zencdn.net/5.18.4/video.min.js"></script> 
+                     <script type="text/javascript">
+                       var myPlayer = videojs('my-video');
+                       videojs("my-video").ready(function(){
+                          var myPlayer = this;
+                          myPlayer.play();
+                       });
+                     </script>
+                  </div>
+              </div>
+                                  <!--*****视频******-->  
+                                   
+                                </div>
+                            </div>
+                     </if>
+                 </volist>
+                        </div>
+                        <div class="portfolio-pagination" style="text-align:center;clear:both;">
+                              {$page}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 padding-top">
+                    <div class="sidebar portfolio-sidebar">
+                        <div class="sidebar-item categories">
+                            <h3>分类</h3>
+                            <ul class="nav navbar-stacked">
+                           <volist name="viedotype" id="vo" key="key"> 
+                                <li><a href="{:U('Video/lst','','')}/id/{$vo.id}">{$vo.name}</a></li>
+                           </volist>
+                            </ul>
+                        </div>
+                        <div class="sidebar-item  recent">
+                            <h3>主题</h3>
+                        <volist name="theme" id="vo">  
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="{:U('Video/lst','','')}/id/{$vid}/tid/{$vo.id}"><img src="__PUBLIC__/img/uploads/theme/{$vo.img}" alt="" style="width:52px;height:52px;"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">{$vo.name}</a></h4>
+                                    <p>{$vo.name}</p>
+                                </div>
+                            </div>
+                       </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#projects-->
+   <include file='Public/footer'/>
